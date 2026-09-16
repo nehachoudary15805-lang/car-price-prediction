@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car Price Prediction</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+          href="{{ url_for('static', filename='favicon.svg') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+
+            <h1>Car Price Prediction</h1>
+            <p>
+                Car Price Prediction using Machine Learning
+            </p>
+
+        </div>
+
+
+        <!-- Main Card -->
+        <div class="card">
+
+            <div class="form-title">
+
+                <h2>Enter Car Details</h2>
+
+                <p>
+                    Provide the car information below to predict its selling price.
+                </p>
+
+            </div>
+
+
+            <!-- Prediction Form -->
+            <form action="/predict" method="POST">
+
+                <div class="form-grid">
+
+                    <!-- Car Name -->
+                    <div class="form-group">
+
+                        <label for="Car_Name">
+                            Car Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="Car_Name"
+                            name="Car_Name"
+                            placeholder="Example: Swift"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Year -->
+                    <div class="form-group">
+
+                        <label for="Year">
+                            Manufacturing Year
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Year"
+                            name="Year"
+                            min="2000"
+                            max="2026"
+                            placeholder="Example: 2018"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Present Price -->
+                    <div class="form-group">
+
+                        <label for="Present_Price">
+                            Present Price (Lakhs)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Present_Price"
+                            name="Present_Price"
+                            step="0.01"
+                            min="0"
+                            placeholder="Example: 6.87"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Driven Kilometers -->
+                    <div class="form-group">
+
+                        <label for="Driven_kms">
+                            Driven Kilometers
+                        </label>
+
+                        <input
+                            type="number"
+                            id="Driven_kms"
+                            name="Driven_kms"
+                            min="0"
+                            placeholder="Example: 42450"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Fuel Type -->
+                    <div class="form-group">
+
+                        <label for="Fuel_Type">
+                            Fuel Type
+                        </label>
+
+                        <select id="Fuel_Type" name="Fuel_Type" required>
+
+                            <option value="" disabled selected>
+                                Select fuel type
+                            </option>
+
+                            <option value="Petrol">
+                                Petrol
+                            </option>
+
+                            <option value="Diesel">
+                                Diesel
+                            </option>
+
+                            <option value="CNG">
+                                CNG
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Selling Type -->
+                    <div class="form-group">
+
+                        <label for="Selling_type">
+                            Selling Type
+                        </label>
+
+                        <select id="Selling_type" name="Selling_type" required>
+
+                            <option value="" disabled selected>
+                                Select selling type
+                            </option>
+
+                            <option value="Dealer">
+                                Dealer
+                            </option>
+
+                            <option value="Individual">
+                                Individual
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Transmission -->
+                    <div class="form-group">
+
+                        <label for="Transmission">
+                            Transmission
+                        </label>
+
+                        <select id="Transmission" name="Transmission" required>
+
+                            <option value="" disabled selected>
+                                Select transmission
+                            </option>
+
+                            <option value="Manual">
+                                Manual
+                            </option>
+
+                            <option value="Automatic">
+                                Automatic
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Owner -->
+                    <div class="form-group">
+
+                        <label for="Owner">
+                            Previous Owners
+                        </label>
+
+                        <select id="Owner" name="Owner" required>
+
+                            <option value="" disabled selected>
+                                Select number of owners
+                            </option>
+
+                            <option value="0">
+                                0
+                            </option>
+
+                            <option value="1">
+                                1
+                            </option>
+
+                            <option value="2">
+                                2
+                            </option>
+
+                            <option value="3">
+                                3
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Button -->
+                <div class="button-area">
+
+                    <button
+                        type="submit"
+                        class="predict-btn">
+                        Predict Selling Price
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- Prediction Result -->
+            {% if prediction is defined %}
+
+            <div class="result">
+
+                <div class="result-title">
+                    Estimated Selling Price
+                </div>
+
+                <div class="result-price">
+                    ₹ {{ prediction }} Lakhs
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Footer -->
+        <div class="footer">
+
+            <p>
+                Powered by Machine Learning • Extra Trees Regressor
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
